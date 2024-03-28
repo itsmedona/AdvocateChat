@@ -1,0 +1,23 @@
+{% extends 'advocatedashboard.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="m-sm-4">
+            {% for i in data %}
+            <form action="{% url 'submitroom' id=i.id %}" method="post" >
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Room Name</label>
+                    <input class="form-control form-control-lg" type="text" name="Room" />
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" name="submit" class="btn btn-lg btn-primary">Submit </button>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

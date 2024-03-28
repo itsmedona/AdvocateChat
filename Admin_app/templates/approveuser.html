@@ -1,0 +1,40 @@
+{% extends 'Adminindex.html' %}
+{% block content %}
+
+<body>
+    <table class="table table-dark">
+        <thead>
+
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email ID</th>
+            <th>District</th>
+            <th>Photo</th>
+            <th>Approve User</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {% for i in data %}
+            <tr class="table-active">
+             
+                <td>{{i.usrname}}</td>
+                <td>{{i.mobilenumber}}</td>
+                <td>{{i.emailid}}</td>
+                <td>{{i.district}}</td>
+
+                <td><img src="{{i.image.url}}" style="width: 60px; height: 60px;"></td>
+                <td> <a href="{% url 'approveusr' id=i.id  %}"> <button name="button" value="OK" type="button">Approve User</button>  </a></td>
+                <td> <a href="{% url 'deleteusr' id=i.id %}"> <button name="button" value="OK" type="button">Delete</button></a></td>
+
+            </tr>
+        {% endfor %}
+
+          
+        
+        </tbody>
+      </table>
+</body>
+
+{% endblock %}

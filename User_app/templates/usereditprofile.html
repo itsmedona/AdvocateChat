@@ -1,0 +1,130 @@
+{% extends 'userdashboard.html' %}
+{% block content %}
+<style type="text/css">
+	.error {
+		color: red
+	}
+</style>
+<main class="d-flex w-100">
+    <div class="container d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                {% for i in data %}
+                                <form action="{% url 'userupdate' id=i.id %}" method="post"
+                                    enctype="multipart/form-data" id="userdedpro">
+                                    {% csrf_token %}
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Name : </div>
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                value="{{i.usrname}}"  name=" usrname" id="" ></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Mobile Number : </div>
+                                        <div class="col-md-6"><input type="tel" class="form-control"
+                                                value="{{i.mobilenumber}}" name=" mobilenumber" id=""></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Email ID : </div>
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                value="{{i.emailid}}" name="emailid" id=""></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> district : </div>
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                value="{{i.district}}" name="district" id=""></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Proof : </div>
+                                        <div class="col-md-6"><input type="file" name="image"></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> User Name : </div>
+                                        <div class="col-md-6"><input type="text" class="form-control"
+                                                value="{{i.username}}" name="username" id=""></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Password : </div>
+                                        <div class="col-md-6"><input type="password" class="form-control"
+                                                value="{{i.password}}" name="password" id="password"></div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4"> Confirm Password : </div>
+                                        <div class="col-md-6"><input type="password" class="form-control"
+                                                value="{{i.password}}" name="cnpass" id=""></div>
+                                    </div>
+
+                                    <div class="text-center",>
+                                        <div class="pt-5">
+                                            <input type="submit" value="submit" placeholder="Submit">
+                                        </div>
+                                    </div>
+                                </form>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script type="text/javascript">
+    $('#userdedpro').validate({
+        rules: {
+            usrname: {
+				required: true,
+				minlength: 2
+			},
+			mobilenumber: {
+				required: true,
+                minlength: 10,
+		        maxlength: 10
+			},
+			emailid: {
+				required: true,
+				email:true
+			},
+			district: {
+				required: true,
+				minlength: 2
+			},
+            image: {
+            required: true,
+            extension: "jpg|jpeg|png|ico|bmp"
+            },
+            username: {
+				required: true,
+				minlength: 2
+			},
+            password: {
+				required: true,
+				minlength: 2
+			},
+            cnpass: {
+				required: true,
+				equalTo: "#password"
+			},
+		}
+        
+
+
+    })
+
+
+</script>
+{% endblock %}
